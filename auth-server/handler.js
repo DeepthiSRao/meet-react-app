@@ -1,3 +1,4 @@
+const { OAuth2Client } = require('google-auth-library');
 const { google } = require('googleapis');
 const OAuth2 = google.auth.OAuth2;
 const calendar = google.calendar("v3");
@@ -39,7 +40,7 @@ module.exports.getAuthURL = async () => {
     Any scope passed must be enabled in our project google console "OAuth consent screen" settings.
     Also, any passed scopes are the ones user will see when consent screen is dispalyed to them. 
   */
-  const authUrl = oAuth2Client.generateAuthUrl({
+  const authURL = oAuth2Client.generateAuthUrl({
     access_type: "offline",
     scope: SCOPES,
   });
@@ -47,48 +48,99 @@ module.exports.getAuthURL = async () => {
   return {
     statusCode: 200,
     headers: {
-      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Origin": "*"
     },
     body: JSON.stringify({
-      authUrl: authUrl,
+      authURL: authURL,
     }),
   };
 };
 
- /* 
-    Code for generating access code 
-  */
-  module.exports.getAccessToken = async (event) => {
-    //instantiate OAuthClient
-    const oAuth2Client = new google.auth.OAuth2(
-      client_id,
-      client_secret,
-      redirect_uris[0]
-    );
+/* 
+  Code for generating access code 
+*/
+module.exports.getAccessToken = async (events) => {
+  //instantiate OAuthClient
+  const oAuth2Client = new google.auth.OAuth2(
+    client_id,
+    client_secret,
+    redirect_uris[0]
+  );
 
-    // Decode authorization code extracted from the URL query
-    const code = decodeURIComponent(`${event.pathParameters.code}`);
+  // Decode authorization code extracted from the URL query
+  const code = decodeURIComponent(`${events.pathParameters.code}`);
 
-    return new Promise((resolve, reject) => {
-      oAuth2Client.getToken(code, (err, token) =>{
-        if(err){
-          return reject(err);
-        }
-        return resolve(token);
-      });
-    })
-    .then((token) => {
-      //respond with oAuth Token
-      return {
-        statusCode: 200,
-        body: JSON.stringify(token),
-      };
-    })
-    .catch((err) => {
-      console.error(err);
-      return {
-        statusCode: 500,
-        body: JSON.stringify(err),
-      };
+  return new Promise((resolve, reject) => {
+    oAuth2Client.getToken(code, (err, token) => {
+      if(err){
+        return reject(err);
+      }
+      return resolve(token);
     });
-  };
+  })
+  .then((token) => {
+    //respond with oAuth Token
+    return {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*"
+      },
+      body: JSON.stringify(token),
+    };
+  })
+  .catch((err) => {
+    console.error(err);
+    return {
+      statusCode: 500,
+      body: JSON.stringify(err),
+    };
+  });
+};
+
+//Fetching google calendar events with access code
+module.exports.getCalendarEvents = async (events) => {
+  //instantiate OAuthClient
+  const oAuth2Client = new google.auth.OAuth2(
+    client_id,
+    client_secret,
+    redirect_uris[0]
+  );
+
+  // Decode authorization code extracted from the URL query
+  const access_token = decodeURIComponent(`${events.pathParameters.access_token}`);
+  oAuth2Client.setCredentials({ access_token });
+
+  return new Promise((resolve, reject) => {
+    calendar.events.list(
+      {
+        calendarId: calendar_id,
+        auth: oAuth2Client,
+        timeMin: new Date().toISOString(),
+        singleEvents: true,
+        orderBy: "startTime",
+      },
+      ( error, response ) => {
+        if(error){
+          return reject(error);
+        }
+        return resolve(response);
+      }
+    );
+  })
+  .then((results) => {
+    return {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin" : "*",
+      },
+      body: JSON.stringify({ events : results.data.items })
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    return {
+      statusCode: 500,
+      body: JSON.stringify(err)
+    };
+  });
+}

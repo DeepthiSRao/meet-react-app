@@ -116,7 +116,7 @@ input[type="number"]{
     color: var(--secondary-color);
 }
 
-.event-description {
+.event-description, .location {
     text-align: left;
     overflow: hidden;
 }

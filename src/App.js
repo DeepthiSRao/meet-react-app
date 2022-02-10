@@ -8,7 +8,9 @@ import { extractLocations, getEvents } from './api';
 class App extends Component {
     state = { 
         events: [],
-        locations: []
+        locations: [],
+        currentLocation: 'all',
+        numberOfEvents: 32
     };
 
     componentDidMount(){
@@ -28,13 +30,28 @@ class App extends Component {
         this.mounted = false;
     }
 
-    updateEvents = location => {
+    // filter events by location/eventCount or by eventCount by previously saved location
+    updateEvents = (location, eventCount) => {
+        const { currentLocation, numberOfEvents } = this.state;
+
+        location ?
         getEvents().then((events) => {
             const locationEvents = (location === 'all') ?
                                     events 
                                     : events.filter((event) => event.location === location);
+
             this.setState({
-                events: locationEvents
+                events: locationEvents.slice(0, numberOfEvents),
+                currentLocation: location
+            });
+        })
+        : getEvents().then((events) => {
+            const locationEvents = (currentLocation === 'all') ?
+                                    events 
+                                    : events.filter((event) => event.location === currentLocation);
+            this.setState({
+                events: locationEvents.slice(0, eventCount),
+                numberOfEvents: eventCount
             });
         });
     }
@@ -43,9 +60,13 @@ class App extends Component {
         return (
         <div className="App">
             <h1 className="title">MeetUp App</h1>
-            <CitySearch locations={this.state.locations} updateEvents={this.updateEvents}/>
-            <NumberOfEvents />
-            <EventList events={this.state.events} />
+            <CitySearch 
+                locations={this.state.locations} 
+                updateEvents={this.updateEvents}/>
+            <NumberOfEvents 
+                updateEvents={this.updateEvents}/>
+            <EventList 
+                events={this.state.events} />
         </div>
         );
     }

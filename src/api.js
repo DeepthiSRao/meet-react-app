@@ -36,7 +36,6 @@ export const getEvents = async () => {
         NProgress.done();
         return result.data.events;
     }
-
 };
 
 // This function removes code from URL

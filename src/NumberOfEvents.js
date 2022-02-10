@@ -15,12 +15,16 @@ class NumberOfEvents extends Component {
     render() { 
         return (
             <div className="numberOfEvents">
+                <label htmlFor="numEventsID">
+                    Number of Events:
+                </label>
                 <input
                     type="number"
                     name="numberOfEvents"
+                    id="numEventsID"
                     className="number-of-events"
                     value={this.state.numberOfEvents}
-                    onChange={e => this.handleInputChange(e)}
+                    onChange={(e) => this.handleInputChange(e)}
                 />
             </div>
         );

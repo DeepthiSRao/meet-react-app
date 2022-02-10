@@ -1,11 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 :root {
-    --primary-color: #000;
+    --primary-color: #ade8f4;
+    --secondary-color: #48cae4;
+    --primary-text-color: #03045e;
+    --secondary-text-color: #fff;
 }
 
 .App * {
     box-sizing: border-box;
     font: normal 1.2rem/1.6 'Lato', sans-serif;
+    color: var(--primary-text-color);
 }
 
 ul {
@@ -19,10 +23,10 @@ p {
 
 input[type="text"],
 input[type="number"]{
-    padding: 10px 8px;
+    padding: 20px 8px;
     border-radius: 4px;
     outline: none;
-    border: 1px solid #ccc;
+    border: 1px solid var(--primary-color);
     align-self: center;
     height: 2rem;
     margin-bottom: 1rem;
@@ -55,15 +59,15 @@ input[type="number"]{
 .suggestions {
     width: 350px;
     position: absolute;
-    top: 32px;
+    top: 42px;
     z-index: 9;
     align-self: center;
-    box-shadow: 10px 10px 16px -12px rgba(0, 0, 0,.75);
+    box-shadow: 10px 10px 16px -12px rgba(var(--primary-color), .75);
 }
 
 .suggestions > li {
     text-align: left;
-    background-color: #eee;
+    background-color: var(--primary-color);
     padding: 8px 16px;
     cursor: default;
 }
@@ -74,11 +78,11 @@ input[type="number"]{
 }
 
 .suggestions > li:hover {
-    background-color: #bcdcdb;
+    background-color: #48cae4;
 }
 
 .numberOfEvents {
-    display: inline-flex;
+    display: grid;
     flex-direction: column;
     align-self: flex-start;
 }
@@ -87,14 +91,19 @@ input[type="number"]{
     text-align: left;
 }
 
+.event-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
 .event {
     display: inline-flex;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
+    border: 1px solid var(--primary-color);
     border-radius: 4px;
 }
 
@@ -103,12 +112,31 @@ input[type="number"]{
     font-weight: 600;
 }
 
+.event .more-details > a {
+    color: var(--secondary-color);
+}
+
 .event-description {
-    overflow: hidden ;
+    text-align: left;
+    overflow: hidden;
 }
 
 .event > button {
-    padding: 2px 8px;
+    font-family: 'Segoe UI', Verdana, sans-serif;
+    color: var(--secondary-text-color);
+    background-color: var(--secondary-color);
+    padding: 4px 8px;
+    border-radius: 4px;
     align-self: flex-end;
-    box-shadow: 10px 10px 16px -12px rgba(0, 0, 0,.75);
+    box-shadow: 10px 10px 16px -12px rgba(var(--primary-color), .75);;
+}
+
+@media screen and (max-width: 1024px) {
+    .body{
+        font-size: 1rem;
+        line-height: 1.2; 
+    }
+    .event-list {
+        grid-template-columns: auto;
+    }  
 }

@@ -23,14 +23,14 @@ describe('<Event /> Component', () => {
     });
 
     test('render event show details button', () => {
-        expect(EventWrapper.find('.show-details')).toHaveLength(1);
+        expect(EventWrapper.find('.details-btn')).toHaveLength(1);
     });
 
     test('show details on button click', () => {
         EventWrapper.setState({
             collapsed: true
         });
-        EventWrapper.find('.show-details').simulate('click');
+        EventWrapper.find('.details-btn').simulate('click');
         expect(EventWrapper.state('collapsed')).toBe(false);
     });
 
@@ -38,7 +38,7 @@ describe('<Event /> Component', () => {
         EventWrapper.setState({
             collapsed: false
         });
-        EventWrapper.find('.hide-details').simulate('click');
+        EventWrapper.find('.details-btn').simulate('click');
         expect(EventWrapper.state('collapsed')).toBe(true);
     });
 });

@@ -11,7 +11,8 @@ export const extractLocations = (eventsList) => {
     return [...new Set(extractLocations)];
 };
 
-//nprogress --> is used to create and display progress bars at the top of the page
+// nprogress --> is used to create and display progress bars at the top of the page
+// getEvents return local mock data if req is from localhost
 export const getEvents = async () => {
     NProgress.start();
 

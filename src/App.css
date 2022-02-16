@@ -29,7 +29,6 @@ input[type="number"]{
     border: 1px solid var(--primary-color);
     align-self: center;
     height: 2rem;
-    margin-bottom: 1rem;
 }
 
 .App {
@@ -53,13 +52,10 @@ input[type="number"]{
     flex-direction: column;
     min-width: 300px;
     margin: 0;
-    position: relative;
 }
 
 .suggestions {
     width: 350px;
-    position: absolute;
-    top: 42px;
     z-index: 9;
     align-self: center;
     box-shadow: 10px 10px 16px -12px rgba(var(--primary-color), .75);
@@ -85,6 +81,7 @@ input[type="number"]{
     display: grid;
     flex-direction: column;
     align-self: flex-start;
+    margin-bottom: 1rem;
 }
 
 .numberOfEvents label {

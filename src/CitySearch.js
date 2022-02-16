@@ -13,6 +13,10 @@ class CitySearch extends Component {
         const { value } = e.target;
         this.setState({showSuggestions: true});
 
+        setTimeout(() => {
+            console.log("Delaying input");
+        }, 2000);
+
         const suggestions = this.props.locations.filter((location) => {
             return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
         });
@@ -21,7 +25,7 @@ class CitySearch extends Component {
             console.log(value);
             this.setState({
                 query: value,
-                infoText: 'We can not find the city you are looking for. Please try another city',
+                infoText: 'We cann\'t find the city you are looking for. Please try another city',
             })
         }else{
             this.setState({
@@ -44,7 +48,7 @@ class CitySearch extends Component {
     
     render() { 
         return (
-            <div className="CitySearch">
+            <div className="city-search">
                 <InfoAlert text={this.state.infoText} />
                 <input
                     type="text"

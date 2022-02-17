@@ -83,7 +83,6 @@ input[type="number"]{
 
 .numberOfEvents {
     margin-top: 6rem;
-    margin-bottom: 1rem;
     display: grid;
     flex-direction: column;
     align-self: flex-start;

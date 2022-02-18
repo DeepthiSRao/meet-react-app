@@ -12,7 +12,6 @@ class NumberOfEvents extends Component {
     handleInputChange = e => {
         const { value } = e.target;
         setTimeout(() => {
-            console.log("Delaying input");
         }, 2000);
 
         if(value <= 0 || value > 32){

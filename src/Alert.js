@@ -15,7 +15,7 @@ class Alert extends Component {
 
     render() { 
         return (
-            <div className={this.props.text === "" ? 'alert' : 'alert show'} >
+            <div className="alert" >
                 <p style={this.getStyle()}>{this.props.text}</p>
             </div>
         );

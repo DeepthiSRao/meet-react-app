@@ -14,7 +14,6 @@ class CitySearch extends Component {
         this.setState({showSuggestions: true});
 
         setTimeout(() => {
-            console.log("Delaying input");
         }, 2000);
 
         const suggestions = this.props.locations.filter((location) => {

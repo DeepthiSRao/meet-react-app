@@ -7,7 +7,7 @@ const EventList = ({ events }) => {
         <div>
             { !navigator.onLine ?
                 <WarningAlert text="Your offline. Events data are loaded from cache!" />
-                : ''
+                : <WarningAlert text="" />
             }
             <ul className="event-list">
                 {

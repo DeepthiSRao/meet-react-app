@@ -1,6 +1,6 @@
 {
   "short_name": "Meetup",
-  "name": "Create React App Sample",
+  "name": "Meetup React App",
   "icons": [
     {
       "src": "favicon.ico",
@@ -23,6 +23,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#03045e",
+  "theme_color": "#000000",
   "background_color": "#ffffff"
 }

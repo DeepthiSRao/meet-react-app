@@ -14,6 +14,7 @@ export const extractLocations = (eventsList) => {
 // nprogress --> is used to create and display progress bars at the top of the page
 // getEvents return local mock data if req is from localhost
 export const getEvents = async () => {
+    NProgress.configure({ trickleRate: 0.02, trickleSpeed: 800 });
     NProgress.start();
 
     //if request is from localhost return local data

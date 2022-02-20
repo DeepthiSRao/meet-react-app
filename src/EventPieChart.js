@@ -3,7 +3,7 @@ import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from "recharts";
 import { COLORS } from './constants';
 
 const EventPieChart = ({events}) => {
-    const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS'];
+    const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'Angular'];
    
     const getData = () => {
         const result = genres.map(genre => ({

@@ -5,7 +5,7 @@ import { COLORS } from './constants';
 const EventScatterChart = ({events, locations}) => {
     const getData = () => {
         return locations.map(location => ({
-            city: location.split(',')[0],
+            city: location.split(',').split(' - ')[0],
             number: events.filter(event => event.location === location).length,
         }));
     }

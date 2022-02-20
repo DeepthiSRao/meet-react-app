@@ -31,8 +31,7 @@ const EventPieChart = ({events}) => {
                         {getData().map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                         ))}
-                    </Pie>
-                    
+                    </Pie>    
                 </PieChart>
             </ResponsiveContainer>
         </div>

@@ -1,7 +1,8 @@
 import React from 'react';
-import { CartesianGrid, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts';
+import { CartesianGrid, Legend, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts';
+import { COLORS } from './constants';
 
-const EventChart = ({events, locations}) => {
+const EventScatterChart = ({events, locations}) => {
     const getData = () => {
         return locations.map(location => ({
             city: location.split(',')[0],
@@ -20,11 +21,12 @@ const EventChart = ({events, locations}) => {
                     <XAxis type="category" dataKey="city" name="City" />
                     <YAxis type="number" dataKey="number" name="Number of events" allowDecimals={false} />
                     <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                    <Scatter name="A school" data={getData()} fill="#8884d8" />
+                    <Scatter name="Number of Events" data={getData()} fill={COLORS[0]} />
+                    <Legend />
                 </ScatterChart>
             </ResponsiveContainer>
         </div>
     );
 }
  
-export default EventChart;
+export default EventScatterChart;

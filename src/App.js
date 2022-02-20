@@ -4,7 +4,8 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import './App.css';
 import { extractLocations, getEvents } from './api';
-import EventChart from './EventChart';
+import EventScatterChart from './EventScatterChart';
+import EventPieChart from './EventPieChart';
 
 class App extends Component {
     state = { 
@@ -59,18 +60,18 @@ class App extends Component {
 
     render(){
         const { events, locations } = this.state;
-        console.log(locations);
 
         return (
-        <div className="App">
-            <h1 className="title">MeetUp App</h1>
-            <CitySearch 
-                locations={locations} 
-                updateEvents={this.updateEvents} />
-            <NumberOfEvents updateEvents={this.updateEvents} />
-            <EventChart events={events} locations={locations} />
-            <EventList events={events} />
-        </div>
+            <div className="App">
+                <h1 className="title">MeetUp App</h1>
+                <CitySearch 
+                    locations={locations} 
+                    updateEvents={this.updateEvents} />
+                <NumberOfEvents updateEvents={this.updateEvents} />
+                <EventScatterChart events={events} locations={locations} />
+                <EventPieChart events={events} />
+                <EventList events={events} />
+            </div>
         );
     }
 }

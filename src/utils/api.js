@@ -23,7 +23,7 @@ export const getEvents = async () => {
         NProgress.done();
         return mockData; 
     }
-   
+
     //offline data fetching
     if(!navigator.onLine){
         const data = localStorage.getItem("lastEvents");
@@ -69,9 +69,14 @@ const removeQuery = () => {
     }
 }
 
+
+/* 
+    1. No Access Token Found in localStorage, check whether authorized code is in url
+    2. Access token found in storage and check whether authorized code is in url
+*/
 export const getAccessToken = async () => {
     const accessToken = localStorage.getItem("access_token");
-    const tokenCheck = accessToken && (await checkToken(accessToken));
+    const tokenCheck = !!accessToken && (await checkToken(accessToken));
 
     if(!accessToken || tokenCheck.error){
         await localStorage.removeItem("access_token");
@@ -84,15 +89,17 @@ export const getAccessToken = async () => {
                 'https://ov8ys4jnv7.execute-api.us-west-1.amazonaws.com/dev/api/get-auth-url'
             );
             const { authURL } = results.data;
+
             return (window.location.href = authURL);
         }
+        console.log(code && getToken(code));
         return code && getToken(code);
     }
     return accessToken;
 };
 
 //check for access token validity
-const checkToken = async (accessToken) => {
+export const checkToken = async (accessToken) => {
     const result = await fetch(
         `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
     )

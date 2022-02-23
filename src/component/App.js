@@ -1,31 +1,36 @@
 import React, { Component } from 'react';
-import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
+import { getEvents, checkToken } from '../utils/api';
+import EventComponent from './EventComponent';
+import GoogleLogin from './GoogleLogin';
 import './App.css';
-import { extractLocations, getEvents } from './api';
-import EventScatterChart from './EventScatterChart';
-import EventPieChart from './EventPieChart';
 
 class App extends Component {
     state = { 
         events: [],
         locations: [],
         currentLocation: 'all',
-        numberOfEvents: 32
+        numberOfEvents: 32,
+        checkToken: null
     };
 
-    componentDidMount(){
+    async componentDidMount(){
         this.mounted = true; /* To fix warning related api call. 
                                 This happens because Jest would have finished running(mount, test & unmount) before api call. */
 
-        getEvents().then((events) => {
-            this.mounted &&
-            this.setState({
-                events,
-                locations: extractLocations(events)
-            });
-        });
+        const accessToken = localStorage.getItem("access_token");
+        const validToken = !!accessToken  ? await checkToken(accessToken) : false;
+        this.setState({ checkToken: validToken });
+        console.log(validToken);
+        validToken && this.updateEvents();
+        const searchParams = new URLSearchParams(window.location.search);
+        const code = searchParams.get("code");
+    
+        if (code && this.mounted && !validToken ){ 
+            this.setState({tokenCheck: true });
+            this.updateEvents()
+        }
     }
 
     componentWillUnmount(){
@@ -59,18 +64,24 @@ class App extends Component {
     }
 
     render(){
-        const { events, locations } = this.state;
+        const { events, locations, checkToken } = this.state;
 
         return (
             <div className="App">
                 <h1 className="title">MeetUp App</h1>
-                <CitySearch 
-                    locations={locations} 
-                    updateEvents={this.updateEvents} />
-                <NumberOfEvents updateEvents={this.updateEvents} />
-                <EventScatterChart events={events} locations={locations} />
-                <EventPieChart events={events} />
-                <EventList events={events} />
+                {
+                    !checkToken
+                    ? <GoogleLogin />
+                    :(
+                        <>
+                            <CitySearch 
+                                locations={locations} 
+                                updateEvents={this.updateEvents} />
+                            <NumberOfEvents updateEvents={this.updateEvents} />
+                            <EventComponent locations={locations} events={events} />
+                        </>
+                    )
+                }
             </div>
         );
     }

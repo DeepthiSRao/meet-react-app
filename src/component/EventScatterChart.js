@@ -1,6 +1,6 @@
 import React from 'react';
 import { CartesianGrid, Legend, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts';
-import { COLORS } from './constants';
+import { COLORS } from '../utils/constants';
 
 const EventScatterChart = ({events, locations}) => {
     const getData = () => {

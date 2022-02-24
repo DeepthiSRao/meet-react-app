@@ -20,7 +20,7 @@ class App extends Component {
                                 This happens because Jest would have finished running(mount, test & unmount) before api call. */
 
         const accessToken = localStorage.getItem("access_token");
-        const validToken = !!accessToken  ? await checkToken(accessToken) : false;
+        const validToken = accessToken !== null ? await checkToken(accessToken) : false;
         this.setState({ checkToken: validToken });
         console.log(validToken);
         validToken && this.updateEvents();

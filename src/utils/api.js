@@ -76,7 +76,7 @@ const removeQuery = () => {
 */
 export const getAccessToken = async () => {
     const accessToken = localStorage.getItem("access_token");
-    const tokenCheck = !!accessToken && (await checkToken(accessToken));
+    const tokenCheck = accessToken && (await checkToken(accessToken));
 
     if(!accessToken || tokenCheck.error){
         await localStorage.removeItem("access_token");
@@ -92,7 +92,6 @@ export const getAccessToken = async () => {
 
             return (window.location.href = authURL);
         }
-        console.log(code && getToken(code));
         return code && getToken(code);
     }
     return accessToken;
@@ -116,7 +115,7 @@ const getToken = async (code) => {
         encodeCode
     )
     .then( res => res.json())
-    .catch( error => error.json());
+    .catch( error => error);
     access_token && localStorage.setItem("access_token", access_token);
 
     return access_token;

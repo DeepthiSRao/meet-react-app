@@ -1,12 +1,12 @@
 const { OAuth2Client } = require('google-auth-library');
 const { google } = require('googleapis');
 const OAuth2 = google.auth.OAuth2;
-const calendar = google.calendar("v3");
+const calendar = google.calendar('v3');
 
 /* 
   Scopes allows you to set the access level
 */
-const SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
+const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
 
 /* 
   Credentials are those values required to get access to your calendar
@@ -20,11 +20,13 @@ const credentials = {
   token_uri: "https://oauth2.googleapis.com/token",
   auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
   redirect_uris: ["https://deepthisrao.github.io/meet-react-app"],
-  javascript_origins: ["https://deepthisrao.github.io", "http://localhost:3000"],
+  javascript_origins: [ "https://deepthisrao.github.io", 
+                        "http://localhost:3000",
+                        "http://localhost:8080"],
 };
 
 const { client_secret, client_id, redirect_uris, calendar_id } = credentials;
-const oAuth2Client = new google.auth.OAuth2(
+const oAuth2Client = new OAuth2(
   client_id,
   client_secret,
   redirect_uris[0]
@@ -48,7 +50,7 @@ module.exports.getAuthURL = async () => {
   return {
     statusCode: 200,
     headers: {
-      "Access-Control-Allow-Origin": "*"
+      "Access-Control-Allow-Origin": "*",
     },
     body: JSON.stringify({
       authURL: authURL,
@@ -61,7 +63,7 @@ module.exports.getAuthURL = async () => {
 */
 module.exports.getAccessToken = async (events) => {
   //instantiate OAuthClient
-  const oAuth2Client = new google.auth.OAuth2(
+  const oAuth2Client = new OAuth2(
     client_id,
     client_secret,
     redirect_uris[0]
@@ -83,7 +85,7 @@ module.exports.getAccessToken = async (events) => {
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "*"
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify(token),
     };
@@ -100,7 +102,7 @@ module.exports.getAccessToken = async (events) => {
 //Fetching google calendar events with access code
 module.exports.getCalendarEvents = async (events) => {
   //instantiate OAuthClient
-  const oAuth2Client = new google.auth.OAuth2(
+  const oAuth2Client = new OAuth2(
     client_id,
     client_secret,
     redirect_uris[0]

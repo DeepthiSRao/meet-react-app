@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
-import { getEvents, checkToken } from '../utils/api';
+import { getEvents, checkToken, extractLocations } from '../utils/api';
 import EventComponent from './EventComponent';
 import GoogleLogin from './GoogleLogin';
 import './App.css';
+import Loader from './Loader';
 
 class App extends Component {
     state = { 
@@ -22,11 +23,11 @@ class App extends Component {
         const accessToken = localStorage.getItem("access_token");
         const validToken = accessToken !== null ? await checkToken(accessToken) : false;
         this.setState({ checkToken: validToken });
-        console.log(validToken);
         validToken && this.updateEvents();
         const searchParams = new URLSearchParams(window.location.search);
         const code = searchParams.get("code");
-    
+        console.log(code);
+
         if (code && this.mounted && !validToken ){ 
             this.setState({tokenCheck: true });
             this.updateEvents()

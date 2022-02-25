@@ -49,7 +49,7 @@
         const getCodeElement = document.getElementById('getCode');
         const resultElement = document.getElementById('result');
         const resultLink = document.getElementById('authURL');
-        const getAuthURL = "https://ov8ys4jnv7.execute-api.us-west-1.amazonaws.com/dev/api/get-auth-url";
+        const getAuthURL = "https://9s8a8q7or0.execute-api.us-west-1.amazonaws.com/dev/api/get-auth-url";
 
         getCodeElement.onclick = () => {
             fetch(getAuthURL)
@@ -67,7 +67,7 @@
         const getAccessToken = document.getElementById("getToken");
         const accessTokenElement = document.getElementById("accessToken");
 
-        const getTokenURL = "https://ov8ys4jnv7.execute-api.us-west-1.amazonaws.com/dev/api/token";
+        const getTokenURL = "https://9s8a8q7or0.execute-api.us-west-1.amazonaws.com/dev/api/token";
 
         getAccessToken.onclick = () => {
             let code = codeValue.value;
@@ -89,7 +89,7 @@
         // ------- Step 3 -------
         const getEvents = document.getElementById("getEvents");
         const events = document.getElementById("events");
-        const getCalendarEventsURL = "https://ov8ys4jnv7.execute-api.us-west-1.amazonaws.com/dev/api/get-events";
+        const getCalendarEventsURL = "https://9s8a8q7or0.execute-api.us-west-1.amazonaws.com/dev/api/get-events";
 
         getEvents.onclick = () => {
             const { access_token } = JSON.parse(accessTokenElement.innerText);

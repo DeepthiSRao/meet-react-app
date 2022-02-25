@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import { ErrorAlert } from './Alert';
 
-
-
 class NumberOfEvents extends Component {
     state = {
         numberOfEvents: 32,

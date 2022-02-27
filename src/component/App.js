@@ -21,17 +21,11 @@ class App extends Component {
 
         const accessToken = localStorage.getItem("access_token");
         const validToken = accessToken !== null ? await checkToken(accessToken) : false;
-        this.setState({ checkToken: validToken });
-
-        if(validToken) 
-            this.updateEvents();
-
         const searchParams = new URLSearchParams(window.location.search);
         const code = searchParams.get("code");
-        console.log(code);
+        this.setState({ checkToken: !(code || validToken) });
 
-        if (code && this.mounted && validToken === false ){ 
-            this.setState({checkToken: true });
+        if ((code|| validToken) && this.mounted ){ 
             this.updateEvents()
         }
     }
@@ -90,7 +84,7 @@ class App extends Component {
         return (
             <div className="App">
                 {
-                    !!checkToken
+                    checkToken
                     ? <GoogleLogin getAccessToken={() => getAccessToken()}/>
                     :(
                         <>

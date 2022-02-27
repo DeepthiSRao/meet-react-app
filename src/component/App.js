@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
-import { getEvents, checkToken, getAccessToken } from '../utils/api';
+import { getEvents, checkToken, getAccessToken, extractLocations } from '../utils/api';
 import EventComponent from './EventComponent';
 import GoogleLogin from './GoogleLogin';
 import './App.css';
@@ -12,7 +12,7 @@ class App extends Component {
         locations: [],
         currentLocation: 'all',
         numberOfEvents: 32,
-        checkToken: null
+        showLogin: null
     };
 
     async componentDidMount(){
@@ -23,10 +23,18 @@ class App extends Component {
         const validToken = accessToken !== null ? await checkToken(accessToken) : false;
         const searchParams = new URLSearchParams(window.location.search);
         const code = searchParams.get("code");
-        this.setState({ checkToken: !(code || validToken) });
+        this.setState({ showLogin: !(code || validToken) });
+        console.log(this.state.showLogin, !(code || validToken));
 
         if ((code|| validToken) && this.mounted ){ 
-            this.updateEvents()
+            getEvents().then((events) => {
+                if (this.mounted) {
+                    this.setState({
+                        events: events.slice(0, this.state.numberOfEvents),
+                        locations: extractLocations(events),
+                    });
+                }
+              });
         }
     }
 
@@ -79,12 +87,12 @@ class App extends Component {
     }
 
     render(){
-        const { events, locations, checkToken } = this.state;
+        const { events, locations, showLogin } = this.state;
 
         return (
             <div className="App">
                 {
-                    checkToken
+                    showLogin
                     ? <GoogleLogin getAccessToken={() => getAccessToken()}/>
                     :(
                         <>

@@ -89,7 +89,7 @@ export const getAccessToken = async () => {
                 "https://9s8a8q7or0.execute-api.us-west-1.amazonaws.com/dev/api/get-auth-url"
             );
             const { authURL } = results.data;
-
+            console.log(authURL);
             return (window.location.href = authURL);
         }
         return code && getToken(code);

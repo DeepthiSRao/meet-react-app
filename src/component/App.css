@@ -40,8 +40,8 @@ input[type="search"]{
     border-radius: 4px;
     outline: none;
     border: 1px solid var(--primary-color);
-    align-self: center;
     height: 2rem;
+    width: 100%;
     text-overflow: ellipsis;
 }
 
@@ -51,18 +51,12 @@ input::placeholder{
 }
 
 input[type="search"], .suggestions {
-    max-width: 400px;
+    width: 100%;
 }
 
 .App {
     margin: 0 5%;
     min-width: 480px;
-}
-
-.google-btn {
-    display: inline-block !important;
-    margin-bottom: var(--margin-size);
-    transform: scale(1.5);
 }
 
 .title {
@@ -82,9 +76,14 @@ input[type="search"], .suggestions {
     display: inline-flex;
     flex-direction: row;
     width: 100%;
+    padding: 1rem 10rem;
     align-items: center;
-    justify-content: center;
-    margin-bottom: calc(2 * var(--margin-size));
+    justify-content: space-evenly;
+    margin-bottom: var(--margin-size);
+}
+
+.city-search {
+    flex-grow: 1;
 }
 
 .city-search, .numberOfEvents {
@@ -183,14 +182,18 @@ input[type="search"], .suggestions {
 .event > button, .search-btn {
     color: var(--secondary-text-color);
     background-color: var(--secondary-color);
-    padding: 4px 8px;
     border-radius: 4px;
     align-self: flex-end;
     box-shadow: 10px 10px 16px -12px rgba(var(--primary-color), .75);;
 }
 
+.event > button {
+    padding: 4px 8px;
+}
+
 .search-btn {
-    padding: 2px 32px;
+    font-weight: 600;
+    padding: .5rem 4rem;
     text-align: center;
 }
 
@@ -205,6 +208,33 @@ input[type="search"], .suggestions {
 .recharts-legend-wrapper {
     top: 400px !important;
  }
+
+ .horizontal-line {
+    height: 8px;
+    background-image: linear-gradient( 120deg, var(--primary-color), var(--primary-text-color), var(--primary-color) );
+    border: 0;
+    height: 1px;
+}
+
+.login-page {
+    height: 100vh;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    margin-top: 80px;
+    width: 300px;
+    border-radius: 4px;
+}
+
+.login-page > p {
+    margin-bottom: var(--margin-size);
+}
+.google-btn {
+    width: '300px' !important;
+}
 
 @media screen and (max-width: 1480px) {
     .App *{

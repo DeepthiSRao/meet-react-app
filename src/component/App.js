@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
-import { getEvents, extractLocations } from '../utils/api';
+import { getEvents, checkToken, getAccessToken } from '../utils/api';
 import EventComponent from './EventComponent';
-// import GoogleLogin from './GoogleLogin';
+import GoogleLogin from './GoogleLogin';
 import './App.css';
 
 class App extends Component {
@@ -12,42 +12,42 @@ class App extends Component {
         locations: [],
         currentLocation: 'all',
         numberOfEvents: 32,
-        // checkToken: null
+        checkToken: null
     };
 
-    // async componentDidMount(){
-    //     this.mounted = true; /* To fix warning related api call. 
-    //                             This happens because Jest would have finished running(mount, test & unmount) before api call. */
-
-    //     const accessToken = localStorage.getItem("access_token");
-    //     const validToken = !!accessToken ? await checkToken(accessToken) : false;
-    //     this.setState({ checkToken: validToken });
-
-    //     if(validToken) 
-    //         this.updateEvents();
-
-    //     const searchParams = new URLSearchParams(window.location.search);
-    //     const code = searchParams.get("code");
-    //     console.log(code);
-
-    //     if (this.mounted && !validToken ){ 
-    //         this.setState({tokenCheck: true });
-    //         this.updateEvents()
-    //     }
-    // }
-
-    componentDidMount(){
+    async componentDidMount(){
         this.mounted = true; /* To fix warning related api call. 
                                 This happens because Jest would have finished running(mount, test & unmount) before api call. */
 
-        getEvents().then((events) => {
-            this.mounted &&
-            this.setState({
-                events,
-                locations: extractLocations(events)
-            });
-        });
+        const accessToken = localStorage.getItem("access_token");
+        const validToken = accessToken !== null ? await checkToken(accessToken) : false;
+        this.setState({ checkToken: validToken });
+
+        if(validToken) 
+            this.updateEvents();
+
+        const searchParams = new URLSearchParams(window.location.search);
+        const code = searchParams.get("code");
+        console.log(code);
+
+        if (code && this.mounted && validToken === false ){ 
+            this.setState({checkToken: true });
+            this.updateEvents()
+        }
     }
+
+    // componentDidMount(){
+    //     this.mounted = true; /* To fix warning related api call. 
+    //                             This happens because Jest would have finished running(mount, test & unmount) before api call. */
+
+    //     getEvents().then((events) => {
+    //         this.mounted &&
+    //         this.setState({
+    //             events,
+    //             locations: extractLocations(events)
+    //         });
+    //     });
+    // }
 
     componentWillUnmount(){
         this.mounted = false;
@@ -85,18 +85,19 @@ class App extends Component {
     }
 
     render(){
-        const { events, locations } = this.state;
+        const { events, locations, checkToken } = this.state;
 
         return (
             <div className="App">
-                <h1 className="title">MeetUp App <br />
-                    <p>Connecting Developers World Wide</p>
-                </h1>
                 {
-                   /*  !checkToken
-                    ? <GoogleLogin />
-                    : */(
+                    !!checkToken
+                    ? <GoogleLogin getAccessToken={() => getAccessToken()}/>
+                    :(
                         <>
+                            <h1 className="title">MeetUp App <br />
+                                <p>Connecting Developers World Wide</p>
+                            </h1>
+                            <hr className="horizontal-line" />
                             <form onSubmit={e => this.handleSubmit(e)} className="city-serach-form">
                                 <CitySearch 
                                     locations={locations} 

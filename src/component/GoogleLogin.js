@@ -1,14 +1,20 @@
 import React from 'react';
 import GoogleButton from 'react-google-button'
-import { getAccessToken } from '../utils/api';
 
-const GoogleLogin = () => {
+const GoogleLogin = ({getAccessToken}) => {
     return ( 
-        <div>
+        <>
+            <h1>
+                Welcome to <br /><span className="title">MeetUp App</span>
+            </h1>
+            <h4>Log in to see upcoming, worldwide events for developers.</h4>
             <GoogleButton 
+                className="google-btn"
                 onClick={() => getAccessToken()}
             />
-        </div>
+            <br />
+            <a href="https://github.com/DeepthiSRao/meet-react-app" target="_blank" rel="noreferrer">Privacy Policy</a>
+        </>
     );
 }
  

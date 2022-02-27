@@ -27,11 +27,11 @@ class Event extends Component {
                 {
                     !collapsed && 
                     <div className="more-details">
-                        <h3>About event:</h3>
+                        <h3>About event:</h3>                       
+                        <p className="event-description">{event.description}</p>
                         <a href={event.htmlLink} target="_blank" rel="noreferrer">
                             See details on Google Calendar
                         </a>
-                        <p className="event-description">{event.description}</p>
                     </div>
                 }
                 <button className="details-btn" onClick={this.handleClick}>

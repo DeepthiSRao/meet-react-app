@@ -78,7 +78,7 @@ export const getAccessToken = async () => {
     const accessToken = localStorage.getItem("access_token");
     const tokenCheck = accessToken && (await checkToken(accessToken));
 
-    if(!accessToken || tokenCheck.error){
+    if(!accessToken || !tokenCheck){
         await localStorage.removeItem("access_token");
         //if no access code found check for authorization code
         const searchParams = new URLSearchParams(window.location.search);

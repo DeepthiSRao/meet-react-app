@@ -49,16 +49,20 @@ class CitySearch extends Component {
         return (
             <div className="city-search">
                 <InfoAlert text={this.state.infoText} />
+                <label htmlFor="cityID">
+                    City:
+                </label>
                 <input
-                    type="text"
+                    type="search"
                     className="city"
                     name="query"
+                    id="cityID"
                     placeholder="Search for nearest city"
                     value={this.state.query}
                     onChange={this.handleInputChange}
                     onFocus={() => { this.setState({ showSuggestions: true})} }
                 />
-                <ul className="suggestions" style={this.state.showSuggestions ? {} : {display: 'none'}}>
+                <ul className={this.state.showSuggestions ? 'suggestions' : 'display-none'}>
                     {
                         this.state.suggestions.map((suggestion) => (
                             <li 
@@ -68,8 +72,8 @@ class CitySearch extends Component {
                             </li>
                         ))
                     }
-                    <li key='all' onClick={() => this.handleItemClicked("all")}>
-                        <b>See All Cities</b>
+                    <li key='all' onClick={() => this.handleItemClicked("All")}>
+                        See All Cities
                     </li>
                 </ul>
             </div>

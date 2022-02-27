@@ -4,7 +4,7 @@ import { ErrorAlert } from './Alert';
 class NumberOfEvents extends Component {
     state = {
         numberOfEvents: 32,
-        infoText: null
+        infoText: ''
     } 
 
     handleInputChange = e => {
@@ -29,6 +29,7 @@ class NumberOfEvents extends Component {
     render() { 
         return (
             <div className="numberOfEvents">
+                <ErrorAlert text={this.state.infoText} />
                 <label htmlFor="numEventsID">
                     Number of Events:
                 </label>
@@ -36,11 +37,9 @@ class NumberOfEvents extends Component {
                     type="number"
                     name="numberOfEvents"
                     id="numEventsID"
-                    className="number-of-events"
                     value={this.state.numberOfEvents}
                     onChange={(e) => this.handleInputChange(e)}
                 />
-                <ErrorAlert text={this.state.infoText} />
             </div>
         );
     }

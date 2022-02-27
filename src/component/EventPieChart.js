@@ -14,11 +14,11 @@ const EventPieChart = ({events}) => {
     }
 
     return ( 
-        <div>
-            <h4>Pie Chart</h4>
-            <ResponsiveContainer height={400} >
-                <PieChart height={400}>
-                <Legend layout="horizontal" verticalAlign="top" align="center" height={25} />
+        <>
+            <ResponsiveContainer height={400} width={'50%'} className='pie-chart'>
+                <PieChart
+                    margin={{
+                    top: 20, right: 20, bottom: 20, left: 20 }}>              
                     <Pie
                         data={getData()}
                         cx="50%"
@@ -31,10 +31,11 @@ const EventPieChart = ({events}) => {
                         {getData().map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                         ))}
-                    </Pie>    
+                    </Pie>
+                    <Legend layout="horizontal" verticalAlign="bottom" align="center" height={25} />   
                 </PieChart>
             </ResponsiveContainer>
-        </div>
+        </>
     );
 }
  

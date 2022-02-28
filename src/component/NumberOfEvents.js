@@ -20,9 +20,9 @@ class NumberOfEvents extends Component {
                 numberOfEvents: value,
                 infoText: ''
             });
+            this.props.updateEvents(null, value);
         }
 
-        this.state.infoText === '' && this.props.updateEvents(null, value);
     }
 
     render() { 

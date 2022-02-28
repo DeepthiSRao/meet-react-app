@@ -14,9 +14,9 @@ const EventScatterChart = ({events, locations}) => {
             <ResponsiveContainer height={400} width={'60%'} className='scatter-chart'>
                 <ScatterChart
                     margin={{
-                    top: 20, right: 60, bottom: 20, left: 20 }} >
+                    top: 20, right: 20, bottom: 20, left: 20 }} >
                     <CartesianGrid />
-                    <XAxis type="category" dataKey="city" name="City" />
+                    <XAxis type="category" dataKey="city" name="City" angle={`${getData().length >= 10 ? -20 : 0}`} padding={{ top: 10 }} />
                     <YAxis type="number" dataKey="number" name="Number of events" allowDecimals={false} />
                     <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                     <Scatter name="Number of Events" data={getData()} fill={'#48cae4'} />

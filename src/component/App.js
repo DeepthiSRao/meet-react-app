@@ -9,9 +9,10 @@ class App extends Component {
     state = { 
         events: [],
         locations: [],
-        currentLocation: 'all',
+        currentLocation: 'All',
         numberOfEvents: 32,
         showLogin: null
+        // showLogin: false
     };
 
     async componentDidMount(){
@@ -45,7 +46,7 @@ class App extends Component {
     updateEvents = (location, eventCount) => {
         const { currentLocation, numberOfEvents } = this.state;
 
-        location ?
+        !!location ?
         getEvents().then((events) => {
             const locationEvents = (location === 'All') ?
                                     events 
@@ -86,6 +87,7 @@ class App extends Component {
                                 <p>Connecting Developers World Wide</p>
                             </h1>
                            <div className='form-container'>
+                                {/* <div className='err-mess'></div> */}
                                 <form onSubmit={e => this.handleSubmit(e)} className="city-serach-form">
                                     <CitySearch 
                                         locations={locations} 

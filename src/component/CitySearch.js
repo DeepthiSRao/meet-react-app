@@ -3,7 +3,7 @@ import { InfoAlert } from './Alert';
 
 class CitySearch extends Component {
     state = { 
-        query : '',
+        query : 'All',
         suggestions: [],
         showSuggestions: undefined,
         infoText: ''
@@ -12,9 +12,6 @@ class CitySearch extends Component {
     handleInputChange = e => {
         const { value } = e.target;
         this.setState({showSuggestions: true});
-
-        setTimeout(() => {
-        }, 2000);
 
         const suggestions = this.props.locations.filter((location) => {
             return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
@@ -25,6 +22,7 @@ class CitySearch extends Component {
             this.setState({
                 query: value,
                 infoText: 'We cann\'t find the city you are looking for. Please try another city',
+                suggestions: []
             })
         }else{
             this.setState({
@@ -42,7 +40,7 @@ class CitySearch extends Component {
             showSuggestions: false,
             infoText: ''
         });
-        this.props.updateEvents(suggestion);
+        this.state.infoText === '' && this.props.updateEvents(suggestion);
     }
     
     render() { 

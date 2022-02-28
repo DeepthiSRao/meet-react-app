@@ -90,7 +90,7 @@ input[type="search"], .suggestions {
     flex-direction: row;
     width: 60%;
     min-width: 480px;
-    padding: 1rem 4rem;
+    padding: 1.2rem 4rem;
     align-items: center;
     justify-content: space-evenly;
     flex-shrink: 1;
@@ -109,7 +109,10 @@ input[type="search"], .suggestions {
 }
 
 .alert-show {
-    display: none;
+    position: absolute;
+    top: -40px;
+    width: 100vw;
+    visibility: visible;
 }
 
 .alert-hidden {
@@ -121,6 +124,10 @@ input[type="search"], .suggestions {
     box-shadow: 10px 10px 16px -12px rgba(var(--secondary-color), .75);
     position: absolute;
     top: 78px;
+}
+
+.alert-show ~.suggestions {
+    top: 72px;
 }
 
 .display-none {
@@ -245,7 +252,6 @@ input[type="search"], .suggestions {
         font-size: 1.2rem;
         line-height: 1.2; 
     }
-
     .title {
         font-size: 3rem;
     }
@@ -263,15 +269,32 @@ input[type="search"], .suggestions {
         top: 320px !important;
     }
     .suggestions {
-        top: 75px;
+        top: 68px;
+    }
+    .alert-show ~.suggestions {
+        top: 65px;
     }
     .city-serach-form {
         width: 100%;
         padding: 1rem 3.5rem;
     }
+    .alert-show {
+        top: -30px;
+    }
+    .search-btn {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 }
 
 @media screen and (max-width: 1024px) {
+    label {
+        font-size: 1rem !important;
+    }
+    .city-serach-form {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
     .event-list {
         grid-template-columns: auto;
     }

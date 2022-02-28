@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import EventList from '../EventList';
-import Event from '../Event';
-import { mockData } from '../mockData';
+import EventList from '../component/EventList';
+import Event from '../component/Event';
+import { mockData } from '../utils/mockData';
 
 describe('<EventList/> Component', () => {
     test('render correct number of events', () => {

@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import CitySearch from '../CitySearch';
-import { mockData } from '../mockData';
-import { extractLocations } from '../api';
+import CitySearch from '../component/CitySearch';
+import { mockData } from '../utils/mockData';
+import { extractLocations } from '../utils/api';
 
 describe('<CitySearch /> component', () => {
     let locations, CitySearchWrapper;

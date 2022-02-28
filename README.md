@@ -4,14 +4,14 @@ MeetUp app is a serverless, progressive web application(PWA) built with ReactJS 
 ![Markdown Logo](/src/images/home_page.png)
 
 ## App features
-1. Google Login implementation using OAuth2 authentication.
-2. Google calendar events can be filtered by city name or by number events.
+1. Google Login was implemented using OAuth2 authentication.
+2. Google calendar events can be filtered by city name or by number of events.
 3. Users can see or hide event details by clicking on the SHOW/HIDE button.
 4. Events Pie/Scatter chart showing number of upcoming events by city.
 5. AWS lambda (severless) functions are implemented for authorization. 
 6. App displays last saved events when offline.
 
-### Project live demo link : https://deepthisrao.github.io/meet-react-app/
+Project live demo link : [demo](https://deepthisrao.github.io/meet-react-app/)
 
 ## User Stories
 #### Feature 1: FILTER EVENTS BY CITY
@@ -39,7 +39,7 @@ As a ***user***,
 I should be ***able to check on upcoming events***
 So that ***I can view the chart with number of upcoming events in the city***
 
-Click here to view detailed user stories and scenarios [here](https://github.com/DeepthiSRao/meet-react-app/user-stories.md)
+Click here to view detailed user stories and scenarios [here](https://github.com/DeepthiSRao/meet-react-app/blob/main/user-stories.md)
 
 ## Installation
 

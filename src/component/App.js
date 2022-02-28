@@ -11,22 +11,21 @@ class App extends Component {
         locations: [],
         currentLocation: 'All',
         numberOfEvents: 32,
-        showLogin: null
-        // showLogin: false
+        // showLogin: null
+        showLogin: false
     };
 
     async componentDidMount(){
         this.mounted = true; /* To fix warning related api call. 
                                 This happens because Jest would have finished running(mount, test & unmount) before api call. */
 
-        const accessToken = localStorage.getItem("access_token");
-        const validToken = accessToken !== null ? await checkToken(accessToken) : false;
-        const searchParams = new URLSearchParams(window.location.search);
-        const code = searchParams.get("code");
-        this.setState({ showLogin: !(code || validToken) });
-        console.log(this.state.showLogin, !(code || validToken));
+        // const accessToken = localStorage.getItem("access_token");
+        // const validToken = accessToken !== null ? await checkToken(accessToken) : false;
+        // const searchParams = new URLSearchParams(window.location.search);
+        // const code = searchParams.get("code");
+        // this.setState({ showLogin: !(code || validToken) });
 
-        if ((code|| validToken) && this.mounted ){ 
+        // if ((code|| validToken) && this.mounted ){ 
             getEvents().then((events) => {
                 if (this.mounted) {
                     this.setState({
@@ -35,7 +34,7 @@ class App extends Component {
                     });
                 }
               });
-        }
+        // }
     }
 
     componentWillUnmount(){
@@ -87,7 +86,6 @@ class App extends Component {
                                 <p>Connecting Developers World Wide</p>
                             </h1>
                            <div className='form-container'>
-                                {/* <div className='err-mess'></div> */}
                                 <form onSubmit={e => this.handleSubmit(e)} className="city-serach-form">
                                     <CitySearch 
                                         locations={locations} 

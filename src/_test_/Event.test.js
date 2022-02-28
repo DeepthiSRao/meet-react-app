@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Event from '../Event';
+import Event from '../component/Event';
 import { mockData } from '../mockData';
 
 describe('<Event /> Component', () => {

@@ -19,13 +19,13 @@ class App extends Component {
         this.mounted = true; /* To fix warning related api call. 
                                 This happens because Jest would have finished running(mount, test & unmount) before api call. */
 
-        // const accessToken = localStorage.getItem("access_token");
-        // const validToken = accessToken !== null ? await checkToken(accessToken) : false;
-        // const searchParams = new URLSearchParams(window.location.search);
-        // const code = searchParams.get("code");
-        // this.setState({ showLogin: !(code || validToken) });
+        const accessToken = localStorage.getItem("access_token");
+        const validToken = accessToken !== null ? await checkToken(accessToken) : false;
+        const searchParams = new URLSearchParams(window.location.search);
+        const code = searchParams.get("code");
+        this.setState({ showLogin: !(code || validToken) });
 
-        // if ((code|| validToken) && this.mounted ){ 
+        if ((code|| validToken) && this.mounted ){ 
             getEvents().then((events) => {
                 if (this.mounted) {
                     this.setState({
@@ -33,43 +33,41 @@ class App extends Component {
                         locations: extractLocations(events),
                     });
                 }
-              });
-        // }
+            });
+        }
     }
 
     componentWillUnmount(){
         this.mounted = false;
     }
 
-    // filter events by location/eventCount or by eventCount by previously saved location
-    updateEvents = (location, eventCount) => {
-        const { currentLocation, numberOfEvents } = this.state;
-
+    updateInputs = (location, eventCount) => {
         !!location ?
-        getEvents().then((events) => {
-            const locationEvents = (location === 'All') ?
-                                    events 
-                                    : events.filter((event) => event.location === location);
-
-            this.setState({
-                events: locationEvents.slice(0, numberOfEvents),
-                currentLocation: location
-            });
+        this.setState({
+            currentLocation: location
         })
-        : getEvents().then((events) => {
-            const locationEvents = (currentLocation === 'All') ?
-                                    events 
-                                    : events.filter((event) => event.location === currentLocation);
-            this.setState({
-                events: locationEvents.slice(0, eventCount),
-                numberOfEvents: eventCount
-            });
+        : 
+        this.setState({
+            numberOfEvents: eventCount
         });
     }
 
+    // filter events by location/eventCount or by eventCount by previously saved location after submit
     handleSubmit  = e => {
         e.preventDefault();
-        console.log('Submit clicked');
+        const { currentLocation, numberOfEvents } = this.state;
+
+        if(currentLocation !== '' && (numberOfEvents > 0 && numberOfEvents <= 32)){
+            getEvents().then((events) => {
+                const locationEvents = (currentLocation === 'All') ?
+                                        events 
+                                        : events.filter((event) => event.location === currentLocation);
+    
+                this.setState({
+                    events: locationEvents.slice(0, numberOfEvents)
+                });
+            })
+        }
     }
 
     render(){
@@ -89,8 +87,8 @@ class App extends Component {
                                 <form onSubmit={e => this.handleSubmit(e)} className="city-serach-form">
                                     <CitySearch 
                                         locations={locations} 
-                                        updateEvents={this.updateEvents} />
-                                    <NumberOfEvents updateEvents={this.updateEvents} />
+                                        updateEvents={this.updateInputs} />
+                                    <NumberOfEvents updateEvents={this.updateInputs} />
                                     <button type='submit' className='search-btn'>
                                         Search
                                     </button>

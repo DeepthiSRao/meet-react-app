@@ -30,22 +30,14 @@
     margin: 5px 0 0 0;
 }
 
-#inner
-
-{
-    animation: rotate linear;
-    animation-duration: 5s;
-    animation-iteration-count: infinite;
+#inner {
+    animation: rotate linear 5s infinite;
     transform-origin: center;
     transform-box: border-box;
 }
 
-#outer
-
-{
-    animation: rotate-inverse linear;
-    animation-duration: 4s;
-    animation-iteration-count: infinite;
+#outer {
+    animation: rotate-inverse linear 4s infinite;
     transform-origin: center;
     transform-box: border-box;
     

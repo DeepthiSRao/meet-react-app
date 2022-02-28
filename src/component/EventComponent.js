@@ -15,7 +15,7 @@ const EventComponent = ({events, locations}) => {
     return ( 
         <>
             { 
-                events && (
+                events.length > 0 && (
                     <>
                         <div className='event-container'>
                             <h1>Upcoming events in each city</h1> 

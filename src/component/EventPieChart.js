@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from "recharts";
 import { COLORS } from '../utils/constants';
 
 const EventPieChart = ({events}) => {
-    const genres = ['JavaScript', 'React', 'Node', 'jQuery', 'AngularJS'];
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const getData = () => {
+            const genres = ['JavaScript', 'React', 'Node', 'jQuery', 'AngularJS'];
    
-    const getData = () => {
-        const result = genres.map(genre => ({
-            name: genre,
-            value: events.filter(e => e.summary.split(' ').includes(genre)).length
-        })); 
-        return result.filter(data => data.value !== 0);
-    }
+            const result = genres.map(genre => ({
+                                        name: genre,
+                                        value: events.filter(e => e.summary.split(' ').includes(genre)).length
+                            })); 
+            return result.filter(data => data.value !== 0);
+        };
+        
+        setData(() => getData());    
+    }, [events]);
 
     return ( 
         <>
@@ -20,7 +26,7 @@ const EventPieChart = ({events}) => {
                     margin={{
                     top: 20, right: 20, bottom: 20, left: 20 }}>              
                     <Pie
-                        data={getData()}
+                        data={data}
                         cx="50%"
                         cy="50%"
                         labelLine={false}
@@ -28,7 +34,7 @@ const EventPieChart = ({events}) => {
                         fill="#8884d8"
                         dataKey="value"
                         label={({ name, percent}) => `${name} ${(percent * 100).toFixed(0)}%`}>
-                        {getData().map((entry, index) => (
+                        {data.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                         ))}
                     </Pie>

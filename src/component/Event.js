@@ -1,4 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { HiLocationMarker } from 'react-icons/hi';
+import { BsCalendarEvent } from 'react-icons/bs';
+import { CgEventbrite } from 'react-icons/cg';
 
 class Event extends Component {
     state = { 
@@ -16,25 +19,28 @@ class Event extends Component {
         const { event } = this.props;
 
         return ( 
-            <div className="event">
-                <h2 className="summary">{event.summary}</h2>
-                <p className="start-date">
+            <div className='event'>
+                <h2 className='summary'>{event.summary}</h2>
+                <p className='start-date'>
                 {event.start.dateTime} ({event.start.timeZone})
                 </p>
-                <p className="location">
-                    @{event.summary} | {event.location}
+                <p>
+                    <CgEventbrite/> {event.summary}
+                </p>
+                <p className='location'>
+                    <HiLocationMarker /> {event.location}
                 </p>
                 {
                     !collapsed && 
-                    <div className="more-details">
+                    <div className='more-details'>
                         <h3>About event:</h3>                       
-                        <p className="event-description">{event.description}</p>
-                        <a href={event.htmlLink} target="_blank" rel="noreferrer">
-                            See details on Google Calendar
+                        <p className='event-description'>{event.description}</p>
+                        <a href={event.htmlLink} target='_blank' rel='noreferrer'>
+                            <BsCalendarEvent />See details on Google Calendar
                         </a>
                     </div>
                 }
-                <button className="details-btn" onClick={this.handleClick}>
+                <button className='details-btn' onClick={this.handleClick}>
                     { collapsed ? 'show details' : 'hide details'}
                 </button>
             </div>

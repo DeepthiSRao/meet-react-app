@@ -12,14 +12,16 @@ const EventComponent = ({events, locations}) => {
         <>
             { 
                 events && (
-                    <div className='event-page'>
-                        <h1>Upcoming events in each city</h1> 
-                        <div className='event-chart'>
-                            <EventScatterChart events={events} locations={locations} />
-                            <EventPieChart events={events} />
+                    <>
+                        <div className='event-container'>
+                            <h1>Upcoming events in each city</h1> 
+                            <div className='event-chart'>
+                                <EventScatterChart events={events} locations={locations} />
+                                <EventPieChart events={events} />  
+                            </div>
                         </div>
                         <EventList events={events} />
-                    </div>
+                    </>
                 )
             }
         </>

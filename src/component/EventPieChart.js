@@ -15,7 +15,7 @@ const EventPieChart = ({events}) => {
 
     return ( 
         <>
-            <ResponsiveContainer height={400} width={'50%'} className='pie-chart'>
+            <ResponsiveContainer height={400} width={'40%'} className='pie-chart'>
                 <PieChart
                     margin={{
                     top: 20, right: 20, bottom: 20, left: 20 }}>              

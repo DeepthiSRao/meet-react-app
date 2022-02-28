@@ -11,8 +11,7 @@ const GoogleLogin = ({getAccessToken}) => {
                 className='google-btn'
                 onClick={getAccessToken}
             />
-            <br />
-            <a href="https://github.com/DeepthiSRao/meet-react-app" target="_blank" rel="noreferrer">Privacy Policy</a>
+            <a href="https://deepthisrao.github.io/meet-react-app/privacy.html" target="_blank" rel="noreferrer">Privacy Policy</a>
         </div>
     );
 }

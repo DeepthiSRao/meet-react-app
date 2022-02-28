@@ -4,6 +4,7 @@ import App from './component/App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import * as atatus from 'atatus-spa';
+import './index.css';
 
 // for monitoring application with atatus 
 atatus.config('2ae699c967d647f99df4fa77b894ad33').install();

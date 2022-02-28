@@ -4,7 +4,6 @@ import NumberOfEvents from './NumberOfEvents';
 import { getEvents, checkToken, getAccessToken, extractLocations } from '../utils/api';
 import EventComponent from './EventComponent';
 import GoogleLogin from './GoogleLogin';
-import './App.css';
 
 class App extends Component {
     state = { 
@@ -37,19 +36,6 @@ class App extends Component {
               });
         }
     }
-
-    // componentDidMount(){
-    //     this.mounted = true; /* To fix warning related api call. 
-    //                             This happens because Jest would have finished running(mount, test & unmount) before api call. */
-
-    //     getEvents().then((events) => {
-    //         this.mounted &&
-    //         this.setState({
-    //             events,
-    //             locations: extractLocations(events)
-    //         });
-    //     });
-    // }
 
     componentWillUnmount(){
         this.mounted = false;
@@ -90,7 +76,7 @@ class App extends Component {
         const { events, locations, showLogin } = this.state;
 
         return (
-            <div className="App">
+            <div className="container">
                 {
                     showLogin
                     ? <GoogleLogin getAccessToken={() => getAccessToken()}/>
@@ -99,16 +85,17 @@ class App extends Component {
                             <h1 className="title">MeetUp App <br />
                                 <p>Connecting Developers World Wide</p>
                             </h1>
-                            <hr className="horizontal-line" />
-                            <form onSubmit={e => this.handleSubmit(e)} className="city-serach-form">
-                                <CitySearch 
-                                    locations={locations} 
-                                    updateEvents={this.updateEvents} />
-                                <NumberOfEvents updateEvents={this.updateEvents} />
-                                <button type='submit' className='search-btn'>
-                                    Search
-                                </button>
-                            </form>
+                           <div className='form-container'>
+                                <form onSubmit={e => this.handleSubmit(e)} className="city-serach-form">
+                                    <CitySearch 
+                                        locations={locations} 
+                                        updateEvents={this.updateEvents} />
+                                    <NumberOfEvents updateEvents={this.updateEvents} />
+                                    <button type='submit' className='search-btn'>
+                                        Search
+                                    </button>
+                                </form>
+                           </div>
                             <EventComponent locations={locations} events={events} />
                         </>
                     )

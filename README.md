@@ -2,10 +2,10 @@
 MeetUp app is a serverless, progressive web application(PWA) built with ReactJS using TDD(Test driven development) approach. The application uses the Google Calendar API to fetch upcoming events. 
 
 <p align="center">
-  <img src="/src/images/home_page.png" width="500" />
-  <img src="/src/images/loading_page.png" width="500" />
-  <img src="/src/images/event_page2.png" width="500" />
-  <img src="/src/images/event_page1.png" width="500" /> 
+  <img src="/src/images/home_page.png" width="400" height="200"/>
+  <img src="/src/images/event_page2.png" width="400" height="200"/>
+  <img src="/src/images/loading_page.png" width="400" height="200"/>
+  <img src="/src/images/event_page1.png" width="400" height="200"/>
 </p>
 
 ## App features

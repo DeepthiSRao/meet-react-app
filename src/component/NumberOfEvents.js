@@ -16,12 +16,13 @@ class NumberOfEvents extends Component {
                 infoText: 'Select number from 1 to 32'
             });
         }else {
-            this.props.updateEvents(null, value);
             this.setState({
                 numberOfEvents: value,
                 infoText: ''
             });
         }
+
+        this.state.infoText === '' && this.props.updateEvents(null, value);
     }
 
     render() { 

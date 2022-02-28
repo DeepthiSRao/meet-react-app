@@ -11,8 +11,8 @@ class App extends Component {
         locations: [],
         currentLocation: 'All',
         numberOfEvents: 32,
-        // showLogin: null
-        showLogin: false
+        error: false,
+        showLogin: null
     };
 
     async componentDidMount(){
@@ -41,7 +41,7 @@ class App extends Component {
         this.mounted = false;
     }
 
-    updateInputs = (location, eventCount) => {
+    updateInputs = ( location, eventCount ) => {
         !!location ?
         this.setState({
             currentLocation: location
@@ -71,7 +71,7 @@ class App extends Component {
     }
 
     render(){
-        const { events, locations, showLogin } = this.state;
+        const { events, locations, showLogin, currentLocation, numberOfEvents } = this.state;
 
         return (
             <div className="container">
@@ -89,7 +89,11 @@ class App extends Component {
                                         locations={locations} 
                                         updateEvents={this.updateInputs} />
                                     <NumberOfEvents updateEvents={this.updateInputs} />
-                                    <button type='submit' className='search-btn'>
+                                    <button 
+                                        type='submit'
+                                        title='Events Fetch Button'
+                                        disabled={currentLocation === '' && (numberOfEvents <= 0 && numberOfEvents > 32)} 
+                                        className='search-btn'>
                                         Search
                                     </button>
                                 </form>

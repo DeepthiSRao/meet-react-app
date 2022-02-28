@@ -219,6 +219,11 @@ input[type="search"], .suggestions {
     text-align: center;
 }
 
+.search-btn:disabled {
+    opacity: 0.65; 
+    cursor: not-allowed;
+}
+
 .event-chart {
     padding-bottom: 2rem;
     display: flex;
@@ -261,6 +266,7 @@ input[type="search"], .suggestions {
     } 
     .event-list {
         grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
     } 
     .pie-chart, .scatter-chart {
         width: 100% !important;

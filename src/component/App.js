@@ -83,21 +83,21 @@ class App extends Component {
                             <h1 className="title">MeetUp App <br />
                                 <p>Connecting Developers World Wide</p>
                             </h1>
-                           <div className='form-container'>
-                                <form onSubmit={e => this.handleSubmit(e)} className="city-serach-form">
-                                    <CitySearch 
-                                        locations={locations} 
-                                        updateEvents={this.updateInputs} />
-                                    <NumberOfEvents updateEvents={this.updateInputs} />
-                                    <button 
-                                        type='submit'
-                                        title='Events Fetch Button'
-                                        disabled={currentLocation === '' && (numberOfEvents <= 0 && numberOfEvents > 32)} 
-                                        className='search-btn'>
-                                        Search
-                                    </button>
-                                </form>
-                           </div>
+                            <div className='form-container'>
+                                    <form onSubmit={e => this.handleSubmit(e)} className="city-serach-form">
+                                        <CitySearch 
+                                            locations={locations} 
+                                            updateEvents={this.updateInputs} />
+                                        <NumberOfEvents updateEvents={this.updateInputs} />
+                                        <button 
+                                            type='submit'
+                                            title='Events Fetch Button'
+                                            disabled={currentLocation === '' && (numberOfEvents <= 0 && numberOfEvents > 32)} 
+                                            className='search-btn'>
+                                            Search
+                                        </button>
+                                    </form>
+                            </div>
                             <EventComponent locations={locations} events={events} />
                         </>
                     )

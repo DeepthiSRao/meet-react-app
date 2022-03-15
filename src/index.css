@@ -115,6 +115,10 @@ input[type="search"], .suggestions {
     visibility: visible;
 }
 
+.alert-show .warning {
+    top: 0;
+}
+
 .alert-hidden {
     visibility: hidden;
 }
@@ -252,6 +256,9 @@ input[type="search"], .suggestions {
     margin-bottom: var(--margin-size);
 }
 
+.google-btn {
+    margin: 10px auto;
+}
 @media screen and (max-width: 1480px) {
     .container *{
         font-size: 1.2rem;

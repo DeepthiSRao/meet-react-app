@@ -7,7 +7,7 @@ import Loader from './Loader';
 
 const EventComponent = ({events, locations}) => {
     if(!navigator.onLine)
-        return <WarningAlert text="Your offline. Events data are loaded from cache!" />
+        return <WarningAlert className='warning' text="Your offline. Events data are loaded from cache!" />
     
     if( events.length === 0)
         return (<Loader />);
